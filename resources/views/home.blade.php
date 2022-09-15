@@ -106,6 +106,7 @@
                     </form>
                     @if(session('json_str'))
                         <div class="alert alert-success">
+                            {{ __('Generated JSON for service:') }}
                             {{ session('json_str') }}
                         </div>
                     @endif

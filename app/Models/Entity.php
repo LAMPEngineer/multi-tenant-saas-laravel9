@@ -18,22 +18,16 @@ class Entity extends Model
         'number_of_employees',
         'industry',   
         'basic_id',     
-        'user_id',        
     ];
 
-
-/*   public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }*/
 
 
     /**
      * Get the basic that the entity belongs to.
      */
-    /*public function basic()
-    {
-        return $this->belongsTo(Basic::class);
-    }*/
+     public function basic()
+     {
+         return $this->belongsTo(Basic::class, 'basic_id');
+     }
 
 }

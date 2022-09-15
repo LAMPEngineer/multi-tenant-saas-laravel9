@@ -29,7 +29,6 @@ class RealblocksController extends Controller
     public function store(Request $request)
     {
 
-        //$basic = Basic::create($request->all());
         $basic = Basic::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
@@ -39,13 +38,16 @@ class RealblocksController extends Controller
             'user_id' => auth()->id(),
         ]);
 
+        if(!empty($basic->id)){
+            $lastInsertID = $basic->id;
+        }
 
         if(!empty($request->input('number_of_employees'))){
-
+           
             $entity = Entity::create([
                 'number_of_employees' => $request->input('number_of_employees'),
                 'industry' => $request->input('industry'),
-                'basic_id' => $basic->id,
+                'basic_id' => $lastInsertID,
             ]);
         }
 
@@ -61,31 +63,31 @@ class RealblocksController extends Controller
     protected function generateJson(Request $request): string
     {
 
-        $json_string = "{'basic': {
-                            'name': '" . $request->input('name') .  "',
-                            'email': '" . $request->input('email') . "',
-                            'tax_id_number': '" . $request->input('tax_id_number') .  "',
-                            'phone': '" . $request->input('phone') ."'
-                            }";
+        $json_string = '{"basic": {
+                            "name" : "' . $request->input('name') . '",
+                            "email": "' . $request->input('email') . '",
+                    "tax_id_number": "' . $request->input('tax_id_number') .  '",
+                            "phone": "' . $request->input('phone') .'"
+                            }';
 
         if(!empty($request->input('number_of_employees'))){
 
-            $json_string .= ",
-                        'entity': {
-                            'number_of_employees':'" . $request->input('number_of_employees') ."',
-                            'industry':'". $request->input('industry') ."'
-                        }";
-        }
+            $json_string .= ',
+                            "entity": {
+                                "number_of_employees": "' . $request->input('number_of_employees') .'",
+                                "industry": "'. $request->input('industry') .'"
+                                    }';
+            }
                         
                 
         if($request->input('country') != 'usa'){
-                $json_string .= ",
-                            'foreign': {
-                                'country':'" . $request->input('country') ."'
-                            }";
+                $json_string .= ',
+                                "foreign": {
+                                    "country": "' . $request->input('country') .'"
+                                }';
             }
 
-        $json_string .= "}";
+        $json_string .= '}';
 
 
         return $json_string;                        
