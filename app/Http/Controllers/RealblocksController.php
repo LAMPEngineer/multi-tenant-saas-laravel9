@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use App\Models\Basic;
+use App\Models\Individual;
 use App\Models\Entity;
 
 
@@ -17,9 +17,9 @@ class RealblocksController extends Controller
      */
     public function index()
     {
-        $basic = DB::table('basics')->get();
+        $individual = DB::table('individuals')->get();
  
-        return view('appliants', ['appliants' => $basic]);
+        return view('appliants', ['appliants' => $individual]);
     }
  
 
@@ -29,17 +29,16 @@ class RealblocksController extends Controller
     public function store(Request $request)
     {
 
-        $basic = Basic::create([
+        $individual = Individual::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'tax_id_number' => $request->input('tax_id_number'),
             'phone' => $request->input('phone'),
             'country' => $request->input('country'),
-            'user_id' => auth()->id(),
         ]);
 
-        if(!empty($basic->id)){
-            $lastInsertID = $basic->id;
+        if(!empty($individual->id)){
+            $lastInsertID = $individual->id;
         }
 
         if(!empty($request->input('number_of_employees'))){
@@ -47,7 +46,7 @@ class RealblocksController extends Controller
             $entity = Entity::create([
                 'number_of_employees' => $request->input('number_of_employees'),
                 'industry' => $request->input('industry'),
-                'basic_id' => $lastInsertID,
+                'individual_id' => $lastInsertID,
             ]);
         }
 

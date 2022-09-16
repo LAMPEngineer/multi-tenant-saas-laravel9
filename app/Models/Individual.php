@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Basic extends Model
+class Individual extends Model
 {
     use HasFactory;
 
@@ -20,16 +21,16 @@ class Basic extends Model
         'tax_id_number',
         'phone',
         'country',
-        'user_id',
+        'tenant_id',
     ];
 
     public static function boot()
     {
         parent::boot();
 
-        static::addGlobalScope('basic_created_user', function(Builder $builder){
+        static::addGlobalScope('individual_created_tenant', function(Builder $builder){
             if(auth()->check()){
-                return $builder->where('user_id', auth()->id());
+                return $builder->where('tenant_id', auth()->id());
             }
         });
     }
@@ -37,7 +38,7 @@ class Basic extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'tenant_id');
     }
 
 }

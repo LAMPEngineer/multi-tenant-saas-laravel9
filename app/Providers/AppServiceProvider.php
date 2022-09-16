@@ -2,8 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\Basic;
-use App\Observers\BasicObserver;
+
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -25,6 +24,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Basic::observe(BasicObserver::class);
+        //
     }
 }

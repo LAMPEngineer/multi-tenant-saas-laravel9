@@ -13,8 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('basics', function (Blueprint $table) {
-            $table->foreignId('user_id')->constrained('users');
+        Schema::table('individuals', function (Blueprint $table) {
+            $table->unsignedBigInteger('tenant_id')->nullable();
+            $table->foreign('tenant_id')->references('id')->on('users');
         });
     }
 
@@ -25,7 +26,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('basics', function (Blueprint $table) {
+        Schema::table('individuals', function (Blueprint $table) {
             //
         });
     }

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('number_of_employees');
             $table->string('industry');            
             $table->timestamps();
-            $table->foreignId('basic_id')->constrained('basics')->cascadeOnDelete();
+            $table->foreignId('individual_id')->constrained('individuals')->cascadeOnDelete();
         });
     }
 

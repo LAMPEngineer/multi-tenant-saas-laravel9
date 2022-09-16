@@ -17,17 +17,17 @@ class Entity extends Model
     protected $fillable = [
         'number_of_employees',
         'industry',   
-        'basic_id',     
+        'individual_id',     
     ];
 
 
 
     /**
-     * Get the basic that the entity belongs to.
+     * Get the individual that the entity belongs to.
      */
-     public function basic()
+     public function individual()
      {
-         return $this->belongsTo(Basic::class, 'basic_id');
+         return $this->belongsTo(Individual::class, 'individual_id');
      }
 
 }
