@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ApplicantController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +25,8 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('applicants', [App\Http\Controllers\RealblocksController::class, 'index'])->name('applicants');
+Route::resource('/applicant', ApplicantController::class)
+        ->missing(function(Request $request){
+            return Redirect::route('applicants.index');
+        });
 
-Route::post('storeform', [App\Http\Controllers\RealblocksController::class, 'store'])->name('storeform');
