@@ -30,7 +30,7 @@ class Individual extends Model
 
         static::addGlobalScope('individual_created_tenant', function(Builder $builder){
             if(auth()->check()){
-                return $builder->where('tenant_id', auth()->id());
+                return $builder->where('individuals.tenant_id', auth()->id());
             }
         });
     }

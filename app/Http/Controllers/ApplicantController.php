@@ -15,7 +15,10 @@ class ApplicantController extends Controller
      */
     public function index()
     {
-        $applicants = Individual::all();
+        //$applicants = Individual::all();
+        $applicants =Individual::leftJoin('entities', 'individuals.id', '=', 'entities.individual_id')
+        ->get(); 
+        
         return view ('applicants.index')->with('applicants', $applicants);
     }
 

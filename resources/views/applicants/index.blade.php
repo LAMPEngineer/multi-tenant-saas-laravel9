@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-9">
             <div class="card">
                 <div class="card-header">{{ __('Applicants List') }}</div>
 
@@ -16,6 +16,8 @@
                                 <th>Tax Id Number</th>
                                 <th>Phone</th>
                                 <th>Country</th>
+                                <th>Number of Employees</th>
+                                <th>Industry</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -27,6 +29,8 @@
                                 <td>{{ $applicant->tax_id_number }}</td>
                                 <td>{{ $applicant->phone }}</td>
                                 <td>{{ $applicant->country }}</td>
+                                <td>{{ $applicant->number_of_employees }}</td>
+                                <td>{{ $applicant->industry }}</td>
                             </tr>
                         @endforeach
                         </tbody>
