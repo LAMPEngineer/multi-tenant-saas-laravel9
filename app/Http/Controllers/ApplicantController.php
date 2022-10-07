@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use App\Models\Individual;
 use App\Models\Entity;
 
@@ -17,6 +18,7 @@ class ApplicantController extends Controller
     {
         //$applicants = Individual::all();
         $applicants =Individual::leftJoin('entities', 'individuals.id', '=', 'entities.individual_id')
+        ->select('individuals.*', 'entities.number_of_employees', 'entities.industry')
         ->get(); 
         
         return view ('applicants.index')->with('applicants', $applicants);
@@ -59,6 +61,18 @@ class ApplicantController extends Controller
         return redirect('applicant')
         ->with('status', 'Record has been generated')
         ->with('json_str', $this->generateJson($request));
+    }
+
+    /*
+     * To convert model to JSON
+     */
+    protected function convertModelToJson(Collection $collection): string
+    {
+        $data = $collection;
+        if(!empty($collection['number_of_employees'])){
+
+        }
+        return $json_string;
     }
 
     /*
@@ -108,7 +122,9 @@ class ApplicantController extends Controller
      */
     public function show($id)
     {
-        //
+        $individual = Individual::find($id);
+
+        return $individual->toJson();
     }
 
     /**

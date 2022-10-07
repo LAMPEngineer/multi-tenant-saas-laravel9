@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-9">
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header">{{ __('Applicants List') }}</div>
 
@@ -18,6 +18,7 @@
                                 <th>Country</th>
                                 <th>Number of Employees</th>
                                 <th>Industry</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -31,6 +32,7 @@
                                 <td>{{ $applicant->country }}</td>
                                 <td>{{ $applicant->number_of_employees }}</td>
                                 <td>{{ $applicant->industry }}</td>
+                                <td><a href="/applicant/{{$applicant->id}}" class="active">{{__('JSON')}}</a></td>
                             </tr>
                         @endforeach
                         </tbody>
